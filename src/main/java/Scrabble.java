@@ -2,114 +2,76 @@ import java.util.Map;
 import java.util.HashMap;
 import spark.ModelAndView;
 import java.util.Arrays;
-//import spark.template.velocity.VelocityTemplateEngine;
+import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
 
 public class Scrabble {
-    public static void main(String[] args) {}
+    public static void main(String[] args) {
+    String layout = "templates/layout.vtl";
 
-    public Boolean isCharacter (String word) {
-        Boolean result = word.matches(".*[0-9].*");
-        return result;
+    get("/", (request, response) -> {
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("template", "templates/scrabbleform.vtl");
+        return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/score", (request, response) -> {
+        Map<String, Object> model = new HashMap<String, Object>();
+        model.put("template", "templates/scrabbleoutput.vtl");
+
+        String userInput = request.queryParams("userWord");
+        Integer finalScore = totalScoreFinal(userInput);
+
+        model.put("userWord", userInput);
+        model.put("finalScore", finalScore);
+        return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+}
+
+public static Integer totalScoreFinal(String userInput){
+
+    Integer totalScore = 0;
+
+    String userInputCaps = userInput.toUpperCase();
+    char [] userInputArray = userInputCaps.toCharArray();
+
+    for (char userInputArrayItem : userInputArray ){
+        Integer score = eachScore(userInputArrayItem);
+        totalScore = totalScore + score;
     }
+    return totalScore;
+}
 
-    public Integer scrabbleScoreOne (String word){
-        char [] wordArray = word.toCharArray();
-        String [] wsArray = {};
+public static Integer eachScore(char wordInput){
+    Map<Character, Integer> scrabbleScores = new HashMap<>();
+        scrabbleScores.put('A', 1);
+        scrabbleScores.put('E', 1);
+        scrabbleScores.put('I', 1);
+        scrabbleScores.put('O', 1);
+        scrabbleScores.put('U', 1);
+        scrabbleScores.put('L', 1);
+        scrabbleScores.put('N', 1);
+        scrabbleScores.put('R', 1);
+        scrabbleScores.put('S', 1);
+        scrabbleScores.put('T', 1);
+        scrabbleScores.put('D', 2);
+        scrabbleScores.put('G', 2);
+        scrabbleScores.put('B', 3);
+        scrabbleScores.put('C', 3);
+        scrabbleScores.put('M', 3);
+        scrabbleScores.put('P', 3);
+        scrabbleScores.put('F', 4);
+        scrabbleScores.put('H', 4);
+        scrabbleScores.put('V', 4);
+        scrabbleScores.put('W', 4);
+        scrabbleScores.put('Y', 4);
+        scrabbleScores.put('K', 5);
+        scrabbleScores.put('J', 8);
+        scrabbleScores.put('X', 8);
+        scrabbleScores.put('Q', 10);
+        scrabbleScores.put('Z', 10);
 
-        String [] scoreOne = {"A", "E", "I", "O", "U", "L", "N", "R", "S", "T"};
-        Integer score = 0;
-
-        for (Integer j = 0; j <= wordArray.length-1; j++){
-            wsArray[j] = Character.toString(wordArray[j]);
-
-            for (Integer i = 0; i <= scoreOne.length-1; i++) {
-                if (wsArray[j].contains(scoreOne[i])) {
-                    score = 1;
-                }
-            }
-        }
-    }
-
-    public Integer scrabbleScore (String word) {
-
-        String [] scoreOne = {"A", "E", "I", "O", "U", "L", "N", "R", "S", "T"};
-        String [] scoreTwo = { "D", "G" };
-        String [] scoreThree = { "B", "C", "M", "P" };
-        String [] scoreFour = { "F", "H", "V", "W", "Y" };
-        String [] scoreFive = { "K" };
-        String [] scoreEight = { "J", "X" };
-        String [] scoreTen = { "Q", "Z" };
-
-        Integer score = 0;
-        Integer totalScore = 0;
-
-        for (Integer i = 0; i <= scoreOne.length-1; i++) {
-            if (word.contains(scoreOne[i])) {
-                score = 1;
-            }
-        }
-
-        for (Integer i = 0; i <= scoreTwo.length-1; i++) {
-            if (word.contains(scoreTwo[i])) {
-                score = 2;
-            }
-        }
-
-        for (Integer i = 0; i <= scoreThree.length-1; i++) {
-            if (word.contains(scoreThree[i])) {
-                score = 3;
-            }
-        }
-
-        for (Integer i = 0; i <= scoreFour.length-1; i++) {
-            if (word.contains(scoreFour[i])) {
-                score = 4;
-            }
-        }
-
-        for (Integer i = 0; i <= scoreFive.length-1; i++) {
-            if (word.contains(scoreFive[i])) {
-                score = 5;
-            }
-        }
-
-        for (Integer i = 0; i <= scoreEight.length-1; i++) {
-            if (word.contains(scoreEight[i])) {
-                score = 8;
-            }
-        }
-
-        for (Integer i = 0; i <= scoreEight.length-1; i++) {
-            if (word.contains(scoreTen[i])) {
-                score = 10;
-            }
-        }
-
-        return score;
-    }
-
-
-
-    // public Boolean doesContain (String word) {
-    //     String [] scoreOne = new String [] {"A", "E", "I", "O", "U", "L", "N", "R", "S", "T"};
-    //     //char [] charWord = word.toCharArray();
-    //
-    //     //String [] wordArray = new String [];
-    //     Boolean containsIt = false;
-    //
-    //     containsIt = word.contains(scoreOne[0]);
-    //     // for (Integer i = 0; i <= scoreOne.length; i++) {
-    //     //   if (word.contains(scoreOne[i])) {
-    //     //         containsIt = true;
-    //
-    //     //     } else {
-    //     //         containsIt = false;
-    //     //     }
-    //     // }
-    //     return containsIt;
-    //     //Boolean result = word.contains(score1[0]);
-    //     //Boolean result = Arrays.asList(score1).contains(word);
-    //     //return result;
-    // }
+        return scrabbleScores.get(wordInput);
+     }
 }
