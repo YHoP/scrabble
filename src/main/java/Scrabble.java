@@ -22,10 +22,10 @@ public class Scrabble {
         String userInput = request.queryParams("userWord");
         Integer finalScore = 0;
 
-        if ( isNumber(userInput) ) {
-            Boolean isNumber = true;
-        } else {
+        if ( isNumber(userInput) == false ) {
             finalScore = totalScoreFinal(userInput);
+        } else {
+            Boolean isNumber = true;
         }
 
         model.put("userWord", userInput);
