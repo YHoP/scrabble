@@ -20,7 +20,13 @@ public class Scrabble {
         model.put("template", "templates/scrabbleoutput.vtl");
 
         String userInput = request.queryParams("userWord");
-        Integer finalScore = totalScoreFinal(userInput);
+        Integer finalScore = 0;
+
+        if ( isNumber(userInput) ) {
+            Boolean isNumber = true;
+        } else {
+            finalScore = totalScoreFinal(userInput);
+        }
 
         model.put("userWord", userInput);
         model.put("finalScore", finalScore);
@@ -41,6 +47,11 @@ public static Integer totalScoreFinal(String userInput){
         totalScore = totalScore + score;
     }
     return totalScore;
+}
+
+public static Boolean isNumber (String word) {
+    Boolean result = word.matches(".*[0-9].*");
+    return result;
 }
 
 public static Integer eachScore(char wordInput){
