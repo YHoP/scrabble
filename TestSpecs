@@ -1,0 +1,10 @@
+1. The program accepts letter characters.
+2. The program will not run when numbers or other characters are entered.
+3. Valid characters A, E, I, O, U, L, N, R, S, T are assigned a number value of 1
+4. Valid characters D, G are assigned a number value of 2
+5. Valid characters B, C, M, P are assigned a number value of 3
+6. Valid characters F, H, V, W, Y are assigned a number value of 4
+7. Valid characters K are assigned a number value of 5
+8. Valid characters J, X are assigned a number value of 8
+9. Valid characters Q, Z are assigned a number value of 10
+10. Keep track of the total score
