@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestScrabble" tests="1" skipped="0" failures="0" errors="0" timestamp="2015-08-11T16:50:51" hostname="epicodus-110.local" time="0.001">
+<testsuite name="TestScrabble" tests="9" skipped="0" failures="0" errors="0" timestamp="2015-08-11T18:54:23" hostname="epicodus-110.local" time="0.003">
   <properties/>
-  <testcase name="isWordTest_forStringsNotContainingNumbers_true" classname="TestScrabble" time="0.001"/>
+  <testcase name="isWordTest_forStringsContainingNumbers_false" classname="TestScrabble" time="0.001"/>
+  <testcase name="scrabbleScore_returnsAScrabbleScoreForALetter_10" classname="TestScrabble" time="0.0"/>
+  <testcase name="isWordTest_forStringContainingNumbers_true" classname="TestScrabble" time="0.0"/>
+  <testcase name="scrabbleScore_returnsAScrabbleScoreForALetter_1" classname="TestScrabble" time="0.0"/>
+  <testcase name="scrabbleScore_returnsAScrabbleScoreForALetter_2" classname="TestScrabble" time="0.0"/>
+  <testcase name="scrabbleScore_returnsAScrabbleScoreForALetter_3" classname="TestScrabble" time="0.0"/>
+  <testcase name="scrabbleScore_returnsAScrabbleScoreForALetter_4" classname="TestScrabble" time="0.0"/>
+  <testcase name="scrabbleScore_returnsAScrabbleScoreForALetter_5" classname="TestScrabble" time="0.0"/>
+  <testcase name="scrabbleScore_returnsAScrabbleScoreForALetter_8" classname="TestScrabble" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
