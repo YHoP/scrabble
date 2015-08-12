@@ -21,13 +21,13 @@ public class Scrabble {
 
         String userInput = request.queryParams("userWord");
         Integer finalScore = 0;
+        Boolean isNumber = isNumber(userInput);
 
-        if ( isNumber(userInput) == false ) {
+        if ( !isNumber  ) {
             finalScore = totalScoreFinal(userInput);
-        } else {
-            Boolean isNumber = true;
         }
 
+        model.put("isNumber", isNumber);
         model.put("userWord", userInput);
         model.put("finalScore", finalScore);
         return new ModelAndView(model, layout);
